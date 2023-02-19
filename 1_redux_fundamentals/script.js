@@ -57,7 +57,7 @@ const render = () => {
 render();
 
 
-store.subscribe(render)
+store.subscribe(render);
 
 // button click listener
 increaseEl.addEventListener('click', () => {
