@@ -49,9 +49,9 @@ const counterReducer = (state = initialState, action) => {
 // create store
 const store = Redux.createStore(counterReducer);
 
-const render = () => {
+const render = (e) => {
     const state = store.getState();
-    counterEl.innerText = state.value;
+    e.innerText = state.value;
 }
 
 render();
@@ -60,10 +60,33 @@ render();
 store.subscribe(render);
 
 // Button Event 
-incrementEl.addEventListener('click', () => {
-    store.dispatch(incrementCreator(2));
-});
+// incrementEl.addEventListener('click', () => {
+//     store.dispatch(incrementCreator(2));
+// });
 
-decrementEl.addEventListener('click', () => {
-    store.dispatch(decrementCreator(2))
-});
+// decrementEl.addEventListener('click', () => {
+//     store.dispatch(decrementCreator(2))
+// });
+
+const counters = document.getElementById('counters');
+const addButton = document.getElementById('add-counter');
+
+addButton.addEventListener('click', () => {
+    const newCounter = `
+        <div class="singleCounter">
+            <p id="counter">${render(this)}</p>
+            <button onclick="addOne(1)">increment</button>
+            <button onclick="subOne(1)">decrement</button>
+        </div>
+    `
+    counters.innerHTML += newCounter;
+})
+
+function addOne(n) {
+    store.dispatch(incrementCreator(n));
+}
+
+function subOne(n) {
+    store.dispatch(decrementCreator(n));
+}
+
