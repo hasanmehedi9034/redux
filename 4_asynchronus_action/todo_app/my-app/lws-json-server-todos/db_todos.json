@@ -49,6 +49,16 @@
       "text": "hdjhdjhdjsdh",
       "completed": false,
       "id": 9
+    },
+    {
+      "text": "js",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "text": "learn python",
+      "completed": false,
+      "id": 11
     }
   ]
 }
