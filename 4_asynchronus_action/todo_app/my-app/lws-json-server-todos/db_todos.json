@@ -9,7 +9,7 @@
     {
       "id": 2,
       "text": "Learn Modern ES6+ JavaScript",
-      "completed": true,
+      "completed": false,
       "color": "red"
     },
     {
@@ -20,7 +20,7 @@
     },
     {
       "text": "Learn Redux Basics",
-      "completed": true,
+      "completed": false,
       "id": 4,
       "color": "red"
     },
@@ -37,7 +37,7 @@
     },
     {
       "text": "Learn Redux Toolkit",
-      "completed": false,
+      "completed": true,
       "id": 7
     },
     {
