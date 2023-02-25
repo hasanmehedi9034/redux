@@ -1,41 +1,10 @@
 {
   "todos": [
     {
-      "text": "learn js",
-      "completed": true,
-      "id": 1,
-      "color": "yellow"
-    },
-    {
-      "text": "learn redux",
-      "completed": true,
-      "id": 2
-    },
-    {
-      "text": "learn react",
-      "completed": true,
-      "id": 3
-    },
-    {
-      "text": "learn python",
-      "completed": false,
-      "id": 4
-    },
-    {
-      "text": "learn Node js",
-      "completed": false,
-      "id": 5
-    },
-    {
       "text": "atik",
       "completed": false,
       "id": 6,
       "color": "yellow"
-    },
-    {
-      "text": "ziya",
-      "completed": true,
-      "id": 7
     },
     {
       "text": "mehedi",
@@ -43,31 +12,14 @@
       "id": 8
     },
     {
-      "text": "polash",
-      "completed": false,
-      "id": 9
-    },
-    {
       "text": "eti",
       "completed": false,
       "id": 10
     },
     {
-      "text": "komola",
-      "completed": false,
-      "id": 11,
-      "color": "red"
-    },
-    {
       "text": "sundoru",
-      "completed": false,
+      "completed": true,
       "id": 12
-    },
-    {
-      "text": "sundori",
-      "completed": false,
-      "id": 13,
-      "color": "yellow"
     }
   ]
 }
