@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const dynamicCounterSlice = createSlice({
-    name: 'counter',
+    name: 'dynamicCounter',
     initialState,
     reducers: {
         increment: (state, action) => {
@@ -15,6 +15,11 @@ const dynamicCounterSlice = createSlice({
 
         decrement: (state, action) => {
             state.count -= action.payload;
+        }
+    },
+    extraReducers: {
+        ['counter/increment'] : (state, acton) => {
+            state.count++;
         }
     }
 });
