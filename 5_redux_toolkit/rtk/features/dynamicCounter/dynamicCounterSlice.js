@@ -1,4 +1,5 @@
 const {createSlice} = require('@reduxjs/toolkit')
+const {counterActions} = require('../counter/counterSlice')
 
 // initial state
 const initialState = {
@@ -17,10 +18,22 @@ const dynamicCounterSlice = createSlice({
             state.count -= action.payload;
         }
     },
-    extraReducers: {
-        ['counter/increment'] : (state, acton) => {
+    // extraReducers: {
+    //     // ['counter/increment'] : (state, acton) => {
+    //     //     state.count++;
+    //     // }
+
+    //     (builder) => {
+    //         builder.addCase(counterActions.increment, (state, action) => {
+    //             state.count++;
+    //         })
+    //     }
+    // }
+
+    extraReducers: (builder) => {
+        builder.addCase(counterActions.increment, (state, action) => {
             state.count++;
-        }
+        })
     }
 });
 
