@@ -7,5 +7,5 @@ store.subscribe(() => {
 })
 
 // dispatch actions
-store.dispatch(counterActions.increment());
-store.dispatch(counterActions.decrement());
+// store.dispatch(counterActions.increment());
+// store.dispatch(counterActions.decrement());
