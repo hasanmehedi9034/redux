@@ -13,7 +13,7 @@ const store = configureStore({
         dynamiccounter: dynamicCounter,
         post: postReducer
     },
-    middleware: (getDefaultMiddlewares) => [...getDefaultMiddlewares(), logger]
+    middleware: (getDefaultMiddlewares) => [...getDefaultMiddlewares()]
 })
 
 

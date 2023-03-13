@@ -4,7 +4,7 @@ const {fetchPosts} = require('./features/post/postSlice')
 
 // subscribe to state change
 store.subscribe(() => {
-    // console.log(store.getState());
+    console.log(store.getState());
 
 })
 
