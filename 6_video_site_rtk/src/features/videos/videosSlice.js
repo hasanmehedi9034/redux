@@ -35,7 +35,8 @@ const videosSlice = createSlice({
         .addCase(fetchVideos.rejected, (state, action) => {
             state.isLoading = false
             state.videos = []
-            state.isError = action.error?.message
+            state.isError = true
+            state.error =  action.error.message
         })
     }
 })
