@@ -17,7 +17,7 @@ export default function Video() {
     dispatch(fetchVideo(videoId))
   }, [videoId, dispatch])
 
-  const {link, title, tags} = video || {};
+  const {link, title, tags} = video;
 
   // decide what to render
   let content = null;
@@ -34,7 +34,7 @@ export default function Video() {
     </div>
 
     {/* <!-- related videos --> */}
-    <RelatedVideoList currentVideoId={videoId} tags={tags}/>
+    <RelatedVideoList videoId={videoId} tags={tags}/>
   </div>
 
   )
