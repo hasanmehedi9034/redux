@@ -7,9 +7,9 @@ export default function Player({link, title}) {
             className="aspect-video"
             src={link}
             title={title}
-            frameborder=""
+            frameBorder=""
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullscreen
+            allowFullScreen
         ></iframe>
     )
 }
