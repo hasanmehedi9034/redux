@@ -2,19 +2,19 @@ import React from 'react'
 
 export default function Transaction() {
     return (
-        <li class="transaction income">
+        <li className="transaction income">
             <p>Earned this month</p>
-            <div class="right">
+            <div className="right">
                 <p>৳ 100</p>
-                <button class="link">
+                <button className="link">
                     <img
-                        class="icon"
+                        className="icon"
                         src="./images/edit.svg"
                     />
                 </button>
-                <button class="link">
+                <button className="link">
                     <img
-                        class="icon"
+                        className="icon"
                         src="./images/delete.svg"
                     />
                 </button>
