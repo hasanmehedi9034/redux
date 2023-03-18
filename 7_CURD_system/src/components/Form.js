@@ -6,7 +6,7 @@ export default function Form() {
             <h3>Add new transaction</h3>
 
             <div className="form-group">
-                <label for="transaction_name">Name</label>
+                <label>Name</label>
                 <input
                     type="text"
                     name="transaction_name"
@@ -15,7 +15,7 @@ export default function Form() {
             </div>
 
             <div className="form-group radio">
-                <label for="transaction_type">Type</label>
+                <label >Type</label>
                 <div className="radio_group">
                     <input
                         type="radio"
@@ -23,7 +23,7 @@ export default function Form() {
                         name="transaction_type"
                         checked
                     />
-                    <label for="transaction_type">Income</label>
+                    <label >Income</label>
                 </div>
                 <div className="radio_group">
                     <input
@@ -32,12 +32,12 @@ export default function Form() {
                         name="transaction_type"
                         placeholder="Expense"
                     />
-                    <label for="transaction_type">Expense</label>
+                    <label>Expense</label>
                 </div>
             </div>
 
             <div className="form-group">
-                <label for="transaction_amount">Amount</label>
+                <label >Amount</label>
                 <input
                     type="number"
                     placeholder="300"
