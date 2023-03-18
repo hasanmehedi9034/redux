@@ -7,6 +7,8 @@
     font-family: "Raleway", sans-serif;
 }
 
+.error { color: red}
+
 .App {
     display: flex;
     flex-direction: column;

@@ -11,6 +11,30 @@
       "name": "Family Expenses",
       "type": "expense",
       "amount": 200000
+    },
+    {
+      "name": "ea",
+      "type": "income",
+      "amount": 3,
+      "id": 3
+    },
+    {
+      "name": "Mehedi Hasan ",
+      "type": "income",
+      "amount": 22,
+      "id": 4
+    },
+    {
+      "name": "Mehedi Hasan ",
+      "type": "income",
+      "amount": 11,
+      "id": 5
+    },
+    {
+      "name": "Mehedi Hasan ",
+      "type": "expense",
+      "amount": 111,
+      "id": 6
     }
   ]
 }

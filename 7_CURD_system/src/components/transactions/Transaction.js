@@ -1,21 +1,26 @@
 import React from 'react'
+import editImage from '../../assets/images/edit.svg'
+import deleteImage from '../../assets/images/delete.svg'
 
-export default function Transaction() {
+export default function Transaction({transaction}) {
+    const {name, id, type, amount} = transaction || {};
     return (
-        <li className="transaction income">
-            <p>Earned this month</p>
+        <li className={`transaction ${type}`}>
+            <p>{name}</p>
             <div className="right">
-                <p>৳ 100</p>
+                <p>৳ {amount}</p>
                 <button className="link">
                     <img
+                    alt='Edit'
                         className="icon"
-                        src="./images/edit.svg"
+                        src={editImage}
                     />
                 </button>
                 <button className="link">
                     <img
+                    alt='Delete'
                         className="icon"
-                        src="./images/delete.svg"
+                        src={deleteImage}
                     />
                 </button>
             </div>

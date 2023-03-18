@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createTransaction } from '../features/transaction/transactionSlice';
 
 export default function Form() {
-    const { isLoading, isError, error, transactions } = useSelector(state => state.transaction)
+    const { isLoading, isError, error } = useSelector(state => state.transaction)
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [type, setType] = useState('');
