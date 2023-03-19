@@ -4,7 +4,14 @@ import VideoLoader from "../ui/loaders/VideoLoader";
 import Video from "./Video";
 
 export default function Videos() {
-    const {data: videos, isLoading, isError} = useGetVideosQuery();
+    const {data: videos, isLoading, isError} = useGetVideosQuery(undefined, {
+        // refetchOnFocus: false,
+        // refetchOnReconnect: true,
+        // refetchOnMountOrArgChange: true,
+        // skip: true,
+        // refetch,
+        // pollingInterval: 200
+    });
 
     // decide what to render
     let content = null;
