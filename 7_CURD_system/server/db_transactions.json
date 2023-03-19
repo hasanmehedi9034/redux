@@ -1,16 +1,3 @@
 {
-  "transactions": [
-    {
-      "name": "Salary from PGCB",
-      "amount": "75000",
-      "type": "income",
-      "id": 1
-    },
-    {
-      "id": 2,
-      "name": "Family Expenses",
-      "type": "expense",
-      "amount": 200000
-    }
-  ]
+  "transactions": []
 }

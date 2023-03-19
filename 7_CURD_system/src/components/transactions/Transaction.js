@@ -1,16 +1,21 @@
 import React from 'react'
 import editImage from '../../assets/images/edit.svg'
 import deleteImage from '../../assets/images/delete.svg'
-import { useDispatch } from 'react-redux';
-import { editActive, editInactive } from '../../features/transaction/transactionSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { editActive, editInactive, removeTransaction } from '../../features/transaction/transactionSlice'
 
 
 export default function Transaction({ transaction }) {
     const dispatch = useDispatch()
+    const {} = useSelector(state => state)
     const { name, id, type, amount } = transaction || {};
 
     const handleEdit = () => {
         dispatch(editActive(transaction))
+    }
+
+    const handleDelete = () => {
+        dispatch(removeTransaction(id));
     }
 
     return (
@@ -25,7 +30,7 @@ export default function Transaction({ transaction }) {
                         src={editImage}
                     />
                 </button>
-                <button className="link">
+                <button onClick={handleDelete} className="link">
                     <img
                         alt='Delete'
                         className="icon"
