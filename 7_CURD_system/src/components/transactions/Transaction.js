@@ -7,7 +7,6 @@ import { editActive, editInactive, removeTransaction } from '../../features/tran
 
 export default function Transaction({ transaction }) {
     const dispatch = useDispatch()
-    const {} = useSelector(state => state)
     const { name, id, type, amount } = transaction || {};
 
     const handleEdit = () => {

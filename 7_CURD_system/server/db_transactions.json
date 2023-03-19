@@ -1,3 +1,16 @@
 {
-  "transactions": []
+  "transactions": [
+    {
+      "name": "Mehedi Hasan ",
+      "type": "income",
+      "amount": 300,
+      "id": 1
+    },
+    {
+      "name": "famile",
+      "type": "expense",
+      "amount": 100,
+      "id": 2
+    }
+  ]
 }
