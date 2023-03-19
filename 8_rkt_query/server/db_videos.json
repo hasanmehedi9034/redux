@@ -12,15 +12,15 @@
       "thumbnail": "https://i3.ytimg.com/vi/6O4s7v28nlw/maxresdefault.jpg"
     },
     {
-      "id": 2,
-      "title": "VS Code Snippets - Boost your productivity with User Snippets",
-      "description": "আমরা যখন Visual Studio Code Editor এ কাজ করি তখন অহরহ ব্যবহৃত কোড ব্লক গুলো আমাদের কে বারবার টাইপ করতে হয় এবং সামগ্রিকভাবে চিন্তা করলে এরকম ছোট ছোট ম্যনুয়াল কাজ আমাদের productivity অনেকাংশেই কমিয়ে দেয়। VS Code এর বিল্ট ইন ইউজার স্নিপেট ফিচারের মাধ্যমে আমরা কমন কাজগুলো স্নিপেট আকারে সাজিয়ে রেখে দিতে পারি এবং শর্টকাট কমান্ডের মাধ্যমে বড় বড় কোড ব্লক গুলো নিয়ে আসতে পারি। এই ভিডিওতে আপনারা এটাই জানতে পারবেন যে কিভাবে আমরা Visual Studio Code Editor এ কাস্টম স্নিপেট লিখতে পারি।",
+      "title": "VS Code Snippets - Boost your productivity with User Snippets mehedi",
       "author": "Learn with Sumit",
-      "date": "April 25, 2022",
+      "description": "আমরা যখন Visual Studio Code Editor এ কাজ করি তখন অহরহ ব্যবহৃত কোড ব্লক গুলো আমাদের কে বারবার টাইপ করতে হয় এবং সামগ্রিকভাবে চিন্তা করলে এরকম ছোট ছোট ম্যনুয়াল কাজ আমাদের productivity অনেকাংশেই কমিয়ে দেয়। VS Code এর বিল্ট ইন ইউজার স্নিপেট ফিচারের মাধ্যমে আমরা কমন কাজগুলো স্নিপেট আকারে সাজিয়ে রেখে দিতে পারি এবং শর্টকাট কমান্ডের মাধ্যমে বড় বড় কোড ব্লক গুলো নিয়ে আসতে পারি। এই ভিডিওতে আপনারা এটাই জানতে পারবেন যে কিভাবে আমরা Visual Studio Code Editor এ কাস্টম স্নিপেট লিখতে পারি।",
       "duration": "10:12",
+      "date": "April 25, 2022",
       "views": "2.1k",
+      "thumbnail": "https://i3.ytimg.com/vi/N-U6AVcIPy4/maxresdefault.jpg",
       "link": "https://www.youtube-nocookie.com/embed/N-U6AVcIPy4",
-      "thumbnail": "https://i3.ytimg.com/vi/N-U6AVcIPy4/maxresdefault.jpg"
+      "id": 2
     },
     {
       "id": 3,
@@ -34,15 +34,15 @@
       "thumbnail": "https://i3.ytimg.com/vi/4M7D3O2XX4o/maxresdefault.jpg"
     },
     {
-      "id": 4,
       "title": "Debounce Function in JavaScript - JavaScript Job Interview question",
-      "description": "In this video, I have explained about the debounce function in JavaScript. This is a common question interviewers ask at Job Interviews. If you watch this video carefully, you will understand what is debounce and how to handle it with custom debounce function.",
       "author": "Learn with Sumit",
-      "date": "Jan 06, 2022",
+      "description": "In this video, I have explained about the debounce function in JavaScript. This is a common question interviewers ask at Job Interviews. If you watch this video carefully, you will understand what is debounce and how to handle it with custom debounce function.",
       "duration": "10:12",
+      "date": "Jan 06, 2022",
       "views": "2.1k",
+      "thumbnail": "https://i3.ytimg.com/vi/dD9O8DnIBj4/maxresdefault.jpg",
       "link": "https://www.youtube-nocookie.com/embed/dD9O8DnIBj4",
-      "thumbnail": "https://i3.ytimg.com/vi/dD9O8DnIBj4/maxresdefault.jpg"
+      "id": 4
     },
     {
       "id": 5,
@@ -76,17 +76,6 @@
       "views": "2.1k",
       "link": "https://www.youtube-nocookie.com/embed/smDa6hoxLKI",
       "thumbnail": "https://i3.ytimg.com/vi/smDa6hoxLKI/maxresdefault.jpg"
-    },
-    {
-      "title": "Ronaldo FreeKick Goal 🔥 NASSR vs ABHA 2-1 All Goals & Highlights 2023",
-      "author": "Mehedi hasan",
-      "description": "Ronaldo FreeKick Goal 🔥 NASSR vs ABHA 2-1 All Goals & Highlights 2023",
-      "duration": "10:20",
-      "date": "Jan 02 2020",
-      "views": "2.3k",
-      "thumbnail": "https://www.si.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_700/MTk2NjI0Nzg3MTQ4MTIyMDc5/ronaldo-free-kick.webp",
-      "link": "https://youtu.be/mjrrilBnw7k",
-      "id": 8
     },
     {
       "title": "bd",
