@@ -7,11 +7,15 @@ export const apiSlice = createApi({
     }),
     tagTypes: ['Videos', 'Video', 'RelatedVideos'],
     endpoints: (builder) => ({
+
+        //for fetching  all videos
         getVideos: builder.query({
             query: () => '/videos',
             keepUnusedDataFor: 120,
             providesTags: ['Videos']
         }),
+
+        // for fetching single video
         getVideo: builder.query({
             query: (videoId) => `/videos/${videoId}`,
             providesTags: (result, error, arg) => [
@@ -21,6 +25,8 @@ export const apiSlice = createApi({
                 }
             ]
         }),
+
+        // for fetching related all videos
         getRelatedVideos: builder.query({
             query: ({ videoId, videoTitle }) => {
                 const tags = videoTitle.split(' ');
@@ -35,6 +41,8 @@ export const apiSlice = createApi({
                 }
             ]
         }),
+
+        // for adding a video
         addVideo: builder.mutation({
             query: (data) => ({
                 url: '/videos',
@@ -43,6 +51,8 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ['Videos']
         }),
+
+        // for update a video
         editVideo: builder.mutation({
             query: ({ id, data }) => ({
                 url: `/videos/${id}`,
@@ -61,6 +71,8 @@ export const apiSlice = createApi({
                 }
             ]
         }),
+
+        // for deleting video
         deleteVideo: builder.mutation({
             query: (id) => ({
                 url: `/videos/${id}`,
