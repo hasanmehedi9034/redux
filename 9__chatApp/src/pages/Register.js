@@ -1,7 +1,52 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
+import Error from "../components/ui/Error";
+import { useRegisterMutation } from "../features/auth/authApi";
 
 export default function Register() {
+    const [register, { data, isLoading, isError, error }] = useRegisterMutation()
+    const navigate = useNavigate()
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [agreedTerms, setAgreedTerms] = useState(false)
+    const [err, setErr] = useState('')
+
+    const reset = () => {
+        setName('')
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+        setAgreedTerms('')
+    }
+
+    useEffect(() => {
+        if(isError) setErr(error.data)
+        if(data) {
+            navigate('/inbox');
+            reset() 
+        }
+    }, [data, isError, error, navigate])
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setErr('');
+
+        if (confirmPassword !== password) {
+            setErr('Password do not matched')
+        }
+        else {
+            register({
+                name,
+                email,
+                password
+            })
+        }
+    }
+
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -18,7 +63,7 @@ export default function Register() {
                             Create your account
                         </h2>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -26,6 +71,8 @@ export default function Register() {
                                     Full Name
                                 </label>
                                 <input
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                     id="name"
                                     name="Name"
                                     type="Name"
@@ -44,6 +91,8 @@ export default function Register() {
                                     Email address
                                 </label>
                                 <input
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     id="email-address"
                                     name="email"
                                     type="email"
@@ -59,6 +108,8 @@ export default function Register() {
                                     Password
                                 </label>
                                 <input
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     id="password"
                                     name="password"
                                     type="password"
@@ -77,9 +128,11 @@ export default function Register() {
                                     Confirm Password
                                 </label>
                                 <input
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
                                     id="confirmPassword"
                                     name="confirmPassword"
-                                    type="confirmPassword"
+                                    type="password"
                                     autoComplete="current-confirmPassword"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
@@ -91,8 +144,11 @@ export default function Register() {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <input
-                                    id="remember-me"
-                                    name="remember-me"
+                                    required
+                                    checked={agreedTerms}
+                                    onChange={e => setAgreedTerms(e.target.checked)}
+                                    id="agree"
+                                    name="agree"
                                     type="checkbox"
                                     className="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 rounded"
                                 />
@@ -107,6 +163,7 @@ export default function Register() {
 
                         <div>
                             <button
+                                disabled={isLoading}
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
                             >
@@ -114,6 +171,7 @@ export default function Register() {
                                 Sign up
                             </button>
                         </div>
+                        {err !== '' && <Error message={err} />}
                     </form>
                 </div>
             </div>
