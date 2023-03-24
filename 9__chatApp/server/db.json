@@ -5,6 +5,12 @@
       "password": "$2a$10$LXJ5VY3N8cjjvWs/3mBdjO.UaF7shhCFHOWK3qz9kwB9kLasn9bmy",
       "name": "eti",
       "id": 1
+    },
+    {
+      "email": "m@gmail.com",
+      "password": "$2a$10$rzejvYoPkYFqv3dVFw7ClOP0m4S3WH7f3NCBnlMFmDcLicw57c3l2",
+      "name": "Mehedi",
+      "id": 2
     }
   ],
   "conversations": [

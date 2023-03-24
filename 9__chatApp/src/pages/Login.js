@@ -1,8 +1,38 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 import Error from "../components/ui/Error";
+import { useLoginMutation } from "../features/auth/authApi";
 
 export default function Login() {
+    const [login, { data, isError, error }] = useLoginMutation()
+    const navigate = useNavigate()
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [err, setErr] = useState('')
+
+    const reset = () => {
+        setEmail('')
+        setPassword('')
+    }
+
+    useEffect(() => {
+        if(isError) setErr(error.data)
+        if(data) {
+            navigate('/inbox');
+            reset() 
+        }
+    }, [data, isError, error, navigate])
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setErr('');
+        login({
+            email,
+            password
+        })
+    }
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -19,7 +49,7 @@ export default function Login() {
                             Sign in to your account
                         </h2>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -30,6 +60,8 @@ export default function Login() {
                                     Email address
                                 </label>
                                 <input
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
                                     id="email-address"
                                     name="email"
                                     type="email"
@@ -44,6 +76,8 @@ export default function Login() {
                                     Password
                                 </label>
                                 <input
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
                                     id="password"
                                     name="password"
                                     type="password"
@@ -75,7 +109,7 @@ export default function Login() {
                             </button>
                         </div>
 
-                        <Error message="There was an error" />
+                        {err !== '' && <Error message={err} />}
                     </form>
                 </div>
             </div>
