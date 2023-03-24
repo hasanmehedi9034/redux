@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 import useAuthCheck from "./hooks/useAuthCheck";
 import Conversation from "./pages/Conversation";
 import Inbox from "./pages/Inbox";
@@ -12,16 +14,24 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={
-                    <Login />
+                    <PublicRoute>
+                        <Login />
+                    </PublicRoute>
                 } />
                 <Route path="/register" element={
-                    <Register />
+                    <PublicRoute>
+                        <Register />
+                    </PublicRoute>
                 } />
                 <Route path="/inbox" element={
-                    <Conversation />
+                    <PrivateRoute>
+                        <Conversation />
+                    </PrivateRoute>
                 } />
                 <Route path="/inbox/:id" element={
-                    <Inbox />
+                    <PrivateRoute>
+                        <Inbox />
+                    </PrivateRoute>
                 } />
             </Routes>
         </Router>
