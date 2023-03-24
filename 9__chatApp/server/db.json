@@ -1,16 +1,22 @@
 {
   "users": [
     {
-      "email": "eti@gmail.com",
-      "password": "$2a$10$LXJ5VY3N8cjjvWs/3mBdjO.UaF7shhCFHOWK3qz9kwB9kLasn9bmy",
-      "name": "eti",
+      "email": "sumit@learnwithsumit.com",
+      "password": "$2a$10$dCRsLMLye1MD4TY7jmO9Vu5WUnlyHqWv7oP0wNDyKDUuTKelGwj1.",
+      "name": "sumit",
       "id": 1
     },
     {
-      "email": "m@gmail.com",
-      "password": "$2a$10$rzejvYoPkYFqv3dVFw7ClOP0m4S3WH7f3NCBnlMFmDcLicw57c3l2",
-      "name": "Mehedi",
+      "email": "saad@learnwithsumit.com",
+      "password": "$2a$10$mhbvWg6BsfIhC8ZJcTNo5.P3Hb59YL5kdkySqp4V.FgsWqSKgO/zC",
+      "name": "saad",
       "id": 2
+    },
+    {
+      "email": "akash@learnwithsumit.com",
+      "password": "$2a$10$ecetXr6HF/Ty2a.WVsqtJe7Z55Hwe3TyV8U0MVFPNWyDX/2V1JHXG",
+      "name": "Akash",
+      "id": 3
     }
   ],
   "conversations": [
