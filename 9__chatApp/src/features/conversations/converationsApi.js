@@ -8,20 +8,20 @@ export const conversationsApi = apiSlice.injectEndpoints({
             query: (email) => `/conversations?participants_like=${email}&_sort=timestapm&_order=desc&page=1&limit=${process.env.REACT_APP_CONVERSATIONS_PER_PAGE}`
         }),
         getconversation: builder.query({
-            query: ({userEmail, participantEmail}) => `/conversations?participants_like=${userEmail}-${participantEmail}&&participants_like=${participantEmail}-${userEmail}&_sort=timestapm&_order=desc&page=1&limit=${process.env.REACT_APP_CONVERSATIONS_PER_PAGE}`
+            query: ({ userEmail, participantEmail }) => `/conversations?participants_like=${userEmail}-${participantEmail}&&participants_like=${participantEmail}-${userEmail}&_sort=timestapm&_order=desc&page=1&limit=${process.env.REACT_APP_CONVERSATIONS_PER_PAGE}`
         }),
         addConversation: builder.mutation({
-            query: ({sender, data}) => ({
+            query: ({ sender, data }) => ({
                 url: '/conversations',
                 method: 'POST',
                 body: data
             }),
-            async onQueryStarted(arg, {queryFulfilled, dispatch}) {
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const conversation = await queryFulfilled;
-                if(conversation?.data.id) {
+                if (conversation?.data.id) {
                     const users = arg.data.users;
-                    const senderUser =  users.find(user =>  user.email === arg.sender)
-                    const receiverUser =  users.find(user =>  user.email !== arg.sender)
+                    const senderUser = users.find(user => user.email === arg.sender)
+                    const receiverUser = users.find(user => user.email !== arg.sender)
                     // silent entry to message table
                     dispatch(messagesApi.endpoints.addMessage.initiate({
                         conversationId: conversation?.data.id,
@@ -34,26 +34,38 @@ export const conversationsApi = apiSlice.injectEndpoints({
             }
         }),
         editConversation: builder.mutation({
-            query: ({id, data, sender}) => ({
+            query: ({ id, data, sender }) => ({
                 url: `/conversations/${id}`,
                 method: 'PATCH',
                 body: data
             }),
-            async onQueryStarted(arg, {queryFulfilled, dispatch}) {
-                const conversation = await queryFulfilled;
-                if(conversation?.data.id) {
-                    const users = arg.data.users;
-                    const senderUser =  users.find(user =>  user.email === arg.sender)
-                    const receiverUser =  users.find(user =>  user.email !== arg.sender)
-                    // silent entry to message table
-                    dispatch(messagesApi.endpoints.addMessage.initiate({
-                        conversationId: conversation?.data.id,
-                        sender: senderUser,
-                        receiver: receiverUser,
-                        message: arg.data.message,
-                        timestamp: arg.data.timestamp
-                    }))
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                // optimistic cache update start
+                const patchResult1 = dispatch(apiSlice.util.updateQueryData('getconversations', arg.sender, (draft) => {
+                    // eslint-disable-next-line eqeqeq
+                    const draftConversation = draft.find(c => c.id == arg.id);
+                    draftConversation.message = arg.data.message;
+                    draftConversation.timestamp = arg.data.timestamp;
+                }))
+
+
+                try {
+                    const conversation = await queryFulfilled;
+                    if (conversation?.data.id) {
+                        const users = arg.data.users;
+                        const senderUser = users.find(user => user.email === arg.sender)
+                        const receiverUser = users.find(user => user.email !== arg.sender)
+                        // silent entry to message table
+                        dispatch(messagesApi.endpoints.addMessage.initiate({
+                            conversationId: conversation?.data.id,
+                            sender: senderUser,
+                            receiver: receiverUser,
+                            message: arg.data.message,
+                            timestamp: arg.data.timestamp
+                        }))
+                    }
                 }
+                catch (erro) { patchResult1.undo() }
             }
         }),
     }),
