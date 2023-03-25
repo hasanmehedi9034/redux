@@ -10,7 +10,6 @@ export default function useAuthCheck() {
         const localAuth = localStorage?.getItem('auth');
         if(localAuth) {
             const auth = JSON.parse(localAuth);
-            console.log(auth);
             if(auth?.accessToken) {
                 dispatch(userLoggedIn(auth))
             }

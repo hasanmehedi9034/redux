@@ -3,7 +3,7 @@ import { apiSlice } from "../api/apiSlice";
 export const usersApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getUser: builder.query({
-            query: (email) => `/conversations?email=${email}`
+            query: (email) => `/conversations?users=${email}`
         })
     })
 })

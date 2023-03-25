@@ -1,4 +1,37 @@
+import { useState } from "react";
+import { useGetUserQuery } from "../../features/users/usersApi";
+import { isValidEmail } from "../../utils/isValidEmail";
+import Error from "../ui/Error";
+
 export default function Modal({ open, control }) {
+    const [to, setTo] = useState('');
+    const [message, setMessage] = useState('');
+    const [userCheck, setUserCheck] = useState(false);
+
+    const { data: participant } = useGetUserQuery(to, {
+        skip: !userCheck
+    });
+
+    const doSearch = (value) => {
+        if (isValidEmail(value)) {
+            setUserCheck(true);
+            setTo(value);
+        }
+    }
+
+    const debounceHandler = (fn, delay) => {
+        let timeoutId;
+        
+        return (...args) => {
+            if(timeoutId) clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                fn(...args)
+            }, delay)
+        }
+    }
+
+    const handleSearch = debounceHandler(doSearch, 500);
+
     return (
         open && (
             <>
@@ -18,9 +51,10 @@ export default function Modal({ open, control }) {
                                     To
                                 </label>
                                 <input
+                                    onChange={e => handleSearch(e.target.value)}
                                     id="to"
                                     name="to"
-                                    type="to"
+                                    type="email"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                                     placeholder="Send to"
@@ -31,9 +65,11 @@ export default function Modal({ open, control }) {
                                     Message
                                 </label>
                                 <textarea
+                                    value={message}
+                                    onChange={e => setMessage(e.target.value)}
                                     id="message"
                                     name="message"
-                                    type="message"
+                                    type="text"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                                     placeholder="Message"
@@ -50,7 +86,7 @@ export default function Modal({ open, control }) {
                             </button>
                         </div>
 
-                        {/* <Error message="There was an error" /> */}
+                        {participant?.length === 0 && <Error message="This user doesn't exist" />}
                     </form>
                 </div>
             </>
