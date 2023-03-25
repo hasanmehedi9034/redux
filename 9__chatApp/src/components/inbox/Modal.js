@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { conversationsApi } from "../../features/conversations/converationsApi";
 import { useGetUserQuery } from "../../features/users/usersApi";
 import { isValidEmail } from "../../utils/isValidEmail";
 import Error from "../ui/Error";
@@ -7,6 +9,11 @@ export default function Modal({ open, control }) {
     const [to, setTo] = useState('');
     const [message, setMessage] = useState('');
     const [userCheck, setUserCheck] = useState(false);
+    const { user: loggedInUser } = useSelector(state => state.auth) || {}
+    const { email: loggedInEmail } = loggedInUser;
+    const dispatch = useDispatch();
+    const [responseError, setResopnseError] = useState('')
+    const [conversation, setConversation] = useState(undefined);
 
     const { data: participant } = useGetUserQuery(to, {
         skip: !userCheck
@@ -14,16 +21,16 @@ export default function Modal({ open, control }) {
 
     const doSearch = (value) => {
         if (isValidEmail(value)) {
-            setUserCheck(true);
             setTo(value);
+            setUserCheck(true);
         }
     }
 
     const debounceHandler = (fn, delay) => {
         let timeoutId;
-        
+
         return (...args) => {
-            if(timeoutId) clearTimeout(timeoutId);
+            if (timeoutId) clearTimeout(timeoutId);
             timeoutId = setTimeout(() => {
                 fn(...args)
             }, delay)
@@ -31,6 +38,28 @@ export default function Modal({ open, control }) {
     }
 
     const handleSearch = debounceHandler(doSearch, 500);
+
+    useEffect(() => {
+        if (participant?.length > 0 && participant[0].email !== loggedInEmail) {
+            //  check conversation existance
+            dispatch(conversationsApi.endpoints.getconversation.initiate({
+                userEmail: loggedInEmail,
+                participantEmail: to
+            }))
+                .unwrap()
+                .then(data => {
+                    setConversation(data);
+                })
+                .catch(err => {
+                    setResopnseError('There was a problem')
+                })
+        }
+    }, [participant, loggedInEmail, dispatch, to])
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('form submitted');
+    }
 
     return (
         open && (
@@ -43,7 +72,7 @@ export default function Modal({ open, control }) {
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                         Send message
                     </h2>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="#" method="POST">
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -79,6 +108,7 @@ export default function Modal({ open, control }) {
 
                         <div>
                             <button
+                                disabled={conversation === undefined || (participant?.length > 0 && participant[0].email === loggedInEmail)}
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
                             >
@@ -86,7 +116,9 @@ export default function Modal({ open, control }) {
                             </button>
                         </div>
 
-                        {participant?.length === 0 && <Error message="This user doesn't exist" />}
+                        {participant?.length === 0 && <Error message='User Not  Found' />}
+                        {participant?.length > 0 && participant[0].email === loggedInEmail && <Error message='You can not send message to yourself' />}
+                        {responseError !== '' && <Error message={responseError} />}
                     </form>
                 </div>
             </>
