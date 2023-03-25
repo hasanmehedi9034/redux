@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { conversationsApi } from "../../features/conversations/converationsApi";
+import { conversationsApi, useAddConversationMutation, useEditConversationMutation } from "../../features/conversations/converationsApi";
 import { useGetUserQuery } from "../../features/users/usersApi";
 import { isValidEmail } from "../../utils/isValidEmail";
 import Error from "../ui/Error";
@@ -18,6 +18,8 @@ export default function Modal({ open, control }) {
     const { data: participant } = useGetUserQuery(to, {
         skip: !userCheck
     });
+    const [addConversation, {isSuccess: isAddConversation}] = useAddConversationMutation()
+    const [editconversation, {isSuccess: isEditConversation}] = useEditConversationMutation()
 
     const doSearch = (value) => {
         if (isValidEmail(value)) {
@@ -56,9 +58,36 @@ export default function Modal({ open, control }) {
         }
     }, [participant, loggedInEmail, dispatch, to])
 
+    // listen conversation added
+    useEffect(() => {
+        if(isAddConversation || isEditConversation) {
+            control();
+        }
+    }, [isAddConversation, isEditConversation])
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('form submitted');
+        if(conversation?.length > 0) {
+            // edit conversation
+            editconversation({
+                id:  conversation[0].id,
+                data: {
+                    participants: `${loggedInEmail}-${participant[0].email}`,
+                    users: [loggedInUser, participant[0]],
+                    message,
+                    timestamp: new Date().getTime()
+                }
+            })
+        }
+        else if (conversation?.length === 0) {
+            // add conversation
+            addConversation({
+                participants: `${loggedInEmail}-${participant[0].email}`,
+                users: [loggedInUser, participant[0]],
+                message,
+                timestamp: new Date().getTime()
+            });
+        }
     }
 
     return (

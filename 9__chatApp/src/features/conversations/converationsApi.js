@@ -30,5 +30,6 @@ export const conversationsApi = apiSlice.injectEndpoints({
 export const {
     useGetconversationsQuery,
     useGetconversationQuery,
-    useEditConversationMutation
+    useEditConversationMutation,
+    useAddConversationMutation,
 } = conversationsApi
