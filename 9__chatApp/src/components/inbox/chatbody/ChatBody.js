@@ -25,7 +25,7 @@ export default function ChatBody() {
                     // name="Akash Ahmed"
                 />
                 <Messages messages={messages} />
-                <Options />
+                <Options info={messages[0]} />
                 {/* <Blank /> */}
             </>
         )
