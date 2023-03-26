@@ -17,9 +17,9 @@ export default function ChatItems() {
     let content = null;
     if (isLoading) content = <li>Loading...</li>
     else if (!isLoading && isError) content = <Error message={error.data} />
-    else if (!isLoading && !isError && conversations.length === 0) content = <li>No converstaion found</li>
-    else if (!isLoading && !isError && conversations.length > 0) {
-        content = conversations.map(conversation => {
+    else if (!isLoading && !isError && conversations?.length === 0) content = <li>No converstaion found</li>
+    else if (!isLoading && !isError && conversations?.length > 0) {
+        content = conversations?.map(conversation => {
             const { message, timestamp, id } = conversation;
             const { name, email: partnerEmail } = getPartnerInfo(conversation.users, email)
 

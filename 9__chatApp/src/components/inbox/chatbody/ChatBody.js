@@ -15,8 +15,8 @@ export default function ChatBody() {
     let content = null;
     if (isLoading) content = <div>Loading...</div>
     if (!isLoading && isError) content = <Error message={error.data} />
-    if (!isLoading && !isError && messages.length === 0) content = <div>No messages found</div>
-    if (!isLoading && !isError && messages.length > 0) {
+    if (!isLoading && !isError && messages?.length === 0) content = <div>No messages found</div>
+    if (!isLoading && !isError && messages?.length > 0) {
         content = (
             <>
                 <ChatHead

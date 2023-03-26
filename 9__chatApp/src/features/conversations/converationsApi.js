@@ -55,6 +55,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                         arg.sender,
                         (draft) => {
                             const draftConversation = draft.find(
+                                // eslint-disable-next-line eqeqeq
                                 (c) => c.id == arg.id
                             );
                             draftConversation.message = arg.data.message;
