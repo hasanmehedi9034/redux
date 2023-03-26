@@ -1,15 +1,35 @@
 const auth = require("json-server-auth");
 const jsonServer = require("json-server");
+const express = require("express");
+const  http = require("http");
 
-const server = jsonServer.create();
+
+const app = express();
+const server = http.createServer(app);
+const io = require('socket.io')(server);
 const router = jsonServer.router("db.json");
+
+// response middleware
+router.render = (req, res) => {
+    const path = req.path;
+    const method = req.method;
+
+    if(path.includes("/conversations") && (method === 'POST' || method === 'PATCH')) {
+        // emit socket event
+        io.emit('conversation', {
+            data: res.locals.date
+        });
+    }
+    res.json(res.locals.date)
+}
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 9000;
+global.io =  io;;
 
 // Bind the router db to the app
-server.db = router.db;
+app.db = router.db;
 
-server.use(middlewares);
+app.use(middlewares);
 
 const rules = auth.rewriter({
     users: 640,
@@ -17,8 +37,8 @@ const rules = auth.rewriter({
     messages: 660,
 });
 
-server.use(rules);
-server.use(auth);
-server.use(router);
+app.use(rules);
+app.use(auth);
+app.use(router);
 
 server.listen(port);
