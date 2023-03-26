@@ -1,7 +1,7 @@
 import moment from "moment/moment";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useGetconversationsQuery } from "../../features/conversations/converationsApi";
+import { useGetConversationsQuery } from "../../features/conversations/converationsApi";
 import { getPartnerInfo } from "../../utils/getPartnerInfo";
 import Error from "../ui/Error";
 import ChatItem from "./ChatItem";
@@ -11,7 +11,7 @@ export default function ChatItems() {
     const { user } = useSelector(state => state.auth) || {};
 
     const { email } = user || {};
-    const { data: conversations, isLoading, isError, error } = useGetconversationsQuery(email)
+    const { data: conversations, isLoading, isError, error } = useGetConversationsQuery(email)
 
     // decide what to render
     let content = null;
